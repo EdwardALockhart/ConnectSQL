@@ -14,15 +14,3 @@ inspector = inspect(engine)
 tables = []
 for schema in inspector.get_schema_names():
     tables.extend([str(schema)+'.'+str(i) for i in inspector.get_table_names(schema = schema)])
-
-# OR
-
-import pyodbc
-server = 'database.windows.net'
-database = ''
-username = ''
-password = ''   
-driver = 'ODBC Driver 17 for SQL Server'
-conn = pyodbc.connect('DRIVER={'+driver+'};SERVER='+server+';PORT=1433;DATABASE='+database+';UID='+username+';PWD='+password)
-crsr = conn.cursor()
-table_names = [x[2] for x in crsr.tables(tableType = 'TABLE')]
